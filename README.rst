@@ -18,6 +18,25 @@ Testing against `Caucho <http://hessian.caucho.com/>`_'s reference service::
   service = HessianProxy("http://hessian.caucho.com/test/test")
   print service.replyDate_1()
 
+Using `mustaine.twclient` for Twisted
++++++++++++++++++++++++++++++++++++++
+
+Testing against `Caucho <http://hessian.caucho.com/>`_'s reference service::
+
+  from twisted.internet   import reactor
+  from mustaine.twclient  import AsyncHessianProxy
+  
+  def cb( arg ):
+      print arg
+  
+  service = AsyncHessianProxy( "http://hessian.caucho.com/test/test" )
+  
+  deferred = service.replyDate_1()
+  deferred.addBoth( cb )
+  
+  reactor.run()
+
+
 Source
 ------
 
